@@ -35,7 +35,7 @@ const getCommandToRunWithFFMPEG = (
     seekingTimeFormatted,
     durationFormatted
 ) => {
-    return `-y -ss ${seekingTimeFormatted} -i "${url}" -t ${durationFormatted} -f h264 -codec copy out.mp4`;
+    return `-y -ss ${seekingTimeFormatted} -i '${url}' -t ${durationFormatted} -f h264 -codec copy out.mp4`;
 };
 
 app.get("/gifit", (req, res) => {
@@ -91,7 +91,7 @@ app.get("/gifit", (req, res) => {
                 durationFormatted
             );
             try {
-                // await ffmpeg_cli.run(cmd);
+                await ffmpeg_cli.run(cmd);
                 console.log("LOG: PART: 1 Done");
                 await ffmpeg_cli.run(
                     `-y -i out.mp4 -vf "fps=20,scale=500:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 out.gif`
@@ -109,7 +109,10 @@ app.get("/gifit", (req, res) => {
                 });
             }
         })
-        .catch((e) => res.send("LOG: Error: Bad Api Call " + e));
+        .catch((e) => {
+            console.log("LOG: Error: Bad Api Call", e);
+            res.send("LOG: Error: Bad Api Call " + e);
+        });
 });
 
 if (process.env.NODE_ENV === "production") {
