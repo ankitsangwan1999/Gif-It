@@ -97,10 +97,10 @@ app.get("/gifit", (req, res) => {
                     console.log("LOG: Success: Sent the Output Gif File.", err);
                 });
             } catch (err) {
+                console.log("LOG: Error: Probably in ffmpeg_cli:", err);
                 res.sendFile("fail.gif", { root: __dirname }, (err) => {
                     console.log(
-                        "LOG: Error: Failed Sending the Output Gif File.",
-                        err
+                        "LOG: Error: Failed Sending the Output Gif File."
                     );
                 });
             }
