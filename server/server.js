@@ -91,7 +91,7 @@ app.get("/gifit", (req, res) => {
                 durationFormatted
             );
             try {
-                await ffmpeg_cli.run(cmd);
+                // await ffmpeg_cli.run(cmd);
                 console.log("LOG: PART: 1 Done");
                 await ffmpeg_cli.run(
                     `-y -i out.mp4 -vf "fps=20,scale=500:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 out.gif`
