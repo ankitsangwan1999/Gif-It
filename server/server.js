@@ -1,8 +1,10 @@
 import express from "express";
 import youtubedl from "youtube-dl-exec";
 import ffmpeg_cli from "ffmpeg-cli";
-import path from "path";
-const __dirname = path.resolve(); // __dirname here represent the absolute path to the root of the Project
+import path from "path"; // __dirname here represent the absolute path to the root of the Project
+import dotenv from "dotenv";
+const __dirname = path.resolve();
+dotenv.config();
 
 const app = express();
 
@@ -97,6 +99,16 @@ app.get("/gifit", (req, res) => {
         })
         .catch((e) => res.send("LOG: Error: Bad Api Call " + e));
 });
+
+if (process.env.NODE_ENV === "production") {
+    console.log("LOG: Running in Production.");
+    app.use(express.static("build"));
+    app.get("/", (req, res) => {
+        res.sendFile("index.html", (err) => {
+            console.log("LOG: index.html folder is served.");
+        });
+    });
+}
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server Listening at ${port}`));

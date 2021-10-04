@@ -16,7 +16,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
-        "serve": "nodemon --experimental-wasm-threads --experimental-wasm-bulk-memory ./server/server.js",
+        "serve": "node --experimental-wasm-threads --experimental-wasm-bulk-memory ./server/server.js",
         "build": "react-scripts build"
     },
     "eslintConfig": {
@@ -38,7 +38,7 @@
         ]
     },
     "devDependencies": {
-        "dot-env": "0.0.1"
+        "dotenv": "^10.0.0"
     },
     "engines": {
         "node": "14.16.0"
