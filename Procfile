@@ -1,0 +1,1 @@
+web: node --experimental-wasm-threads --experimental-wasm-bulk-memory ./server/server.js
