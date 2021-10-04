@@ -1,0 +1,45 @@
+{
+    "name": "gif-it",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "dependencies": {
+        "axios": "^0.21.4",
+        "downloadjs": "^1.4.7",
+        "ffmpeg-cli": "^2.7.5",
+        "js-file-download": "^0.4.12",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "react-scripts": "4.0.3",
+        "react-youtube": "^7.13.1",
+        "youtube-api-search": "0.0.5",
+        "youtube-dl-exec": "^1.2.14"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "serve": "nodemon --experimental-wasm-threads --experimental-wasm-bulk-memory ./server/server.js",
+        "build": "react-scripts build"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "dot-env": "0.0.1",
+        "express": "^4.17.1"
+    }
+}

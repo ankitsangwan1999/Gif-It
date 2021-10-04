@@ -1,0 +1,19 @@
+.App {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.MainContent {
+    display: flex;
+    justify-content: space-between;
+}
+
+.NoResults {
+    min-height: 56%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

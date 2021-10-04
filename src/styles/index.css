@@ -1,0 +1,24 @@
+@font-face {
+    font-family: "Cool Font";
+    src: url("../static/fonts/Courier\ Prime.ttf");
+}
+html,
+body {
+    height: 100vh;
+}
+
+body {
+    margin: 0;
+    font-family: "Cool Font";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+    height: 100%;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
+}
