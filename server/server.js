@@ -35,7 +35,7 @@ const getCommandToRunWithFFMPEG = (
     seekingTimeFormatted,
     durationFormatted
 ) => {
-    return `-ss ${seekingTimeFormatted} -i "${url}" -t ${durationFormatted} -f h264 -codec copy pipe:1| ffmpeg -y -i pipe:0 -vf "fps=10,scale=500:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 out.gif`;
+    return `-y -ss ${seekingTimeFormatted} -i "${url}" -t ${durationFormatted} -f h264 -codec copy out.mp4`;
 };
 
 app.get("/gifit", (req, res) => {
@@ -92,6 +92,10 @@ app.get("/gifit", (req, res) => {
             );
             try {
                 await ffmpeg_cli.run(cmd);
+                console.log("LOG: PART: 1 Done");
+                await ffmpeg_cli.run(
+                    `-y -i out.mp4 -vf "fps=20,scale=500:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 out.gif`
+                );
                 console.log("LOG: Got the gif.");
                 res.sendFile("out.gif", { root: __dirname }, (err) => {
                     console.log("LOG: Success: Sent the Output Gif File.", err);
