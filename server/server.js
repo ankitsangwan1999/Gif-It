@@ -39,11 +39,18 @@ const getCommandToRunWithFFMPEG = (
 };
 
 app.get("/gifit", (req, res) => {
-    res.set({
-        "Access-Control-Allow-Origin": "http://localhost:3000", // Origin where React App is running, to Allow Cross-Origin receiving of response sent from here.
-        "Content-Type": "image/jpg", // mime-type for gif file
-        "Content-Disposition": "attachment;filename='GifIt.gif'", // Making the File donwloadable
-    });
+    if (process.env.NODE_ENV === "production") {
+        res.set({
+            "Content-Type": "image/jpg", // mime-type for gif file
+            "Content-Disposition": "attachment;filename='GifIt.gif'", // Making the File donwloadable
+        });
+    } else {
+        res.set({
+            "Access-Control-Allow-Origin": "http://localhost:3000", // Origin where React App is running, to Allow Cross-Origin receiving of response sent from here.
+            "Content-Type": "image/jpg", // mime-type for gif file
+            "Content-Disposition": "attachment;filename='GifIt.gif'", // Making the File donwloadable
+        });
+    }
 
     const watchUrl = req.query.watchUrl;
     const seekingTime = req.query.seekingTime; // in seconds

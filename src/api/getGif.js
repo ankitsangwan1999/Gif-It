@@ -2,7 +2,11 @@ import axios from "axios";
 import download from "downloadjs";
 
 // TODO: ISSUE: Make this var available from .env file as REACT_APP_BACKEND_ORIGIN
+
 let ROOT_URL = "http://localhost:5000";
+if (process.env.NODE_ENV === "production") {
+    ROOT_URL = "https://gif-it-now.herokuapp.com";
+}
 
 /**
  *
