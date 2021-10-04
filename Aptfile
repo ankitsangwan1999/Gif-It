@@ -1,4 +1,3 @@
 # packages
-ffmpeg
+ffmpeg=4.2.4-1ubuntu0.1
 libvpx6
-libusb-1.0-0
