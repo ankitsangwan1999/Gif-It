@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Video.css";
 import VideoActions from "./VideoActions";
 import YouTube from "react-youtube"; // https://www.npmjs.com/package/react-youtube
