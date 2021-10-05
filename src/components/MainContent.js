@@ -69,7 +69,6 @@ const MainContent = ({ videosList }) => {
                 },
                 () => {
                     // This Function will be called by getGif ffter Gif is Downloaded.
-                    console.log("LOG: Gif Downloaded");
                     setVideoDetails((prev) => {
                         return { ...prev, shouldCreateGif: false };
                     });

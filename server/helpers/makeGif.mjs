@@ -72,7 +72,6 @@ const getGif = async () => {
 const makeGif = async (watchUrl, seekingTimeFormatted, durationFormatted) => {
     try {
         const sourceUrl = await getSourceUrl(watchUrl);
-
         console.log("LOG: Got the Source URL. Making the Mp4 File now...");
         await getMp4(seekingTimeFormatted, durationFormatted, sourceUrl);
         console.log("LOG: Generated the Mp4 File. Making it a Gif file now...");

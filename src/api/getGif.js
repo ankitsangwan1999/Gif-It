@@ -20,7 +20,9 @@ const getGif = (params, callback) => {
             callback();
         })
         .catch(function (error) {
+            alert("There was an error. Try Again.");
             console.error("LOG: Error:", error);
+            callback();
         });
 };
 
