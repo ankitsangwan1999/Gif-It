@@ -35,7 +35,7 @@ const getSourceUrl = async (watchUrl) => {
 
 const getMp4 = async (seekingTimeFormatted, durationFormatted, sourceUrl) => {
     const makeMp4Command = shell([
-        FFMPEG_PATH,
+        `${FFMPEG_PATH}`,
         "-y",
         "-ss",
         seekingTimeFormatted,
@@ -49,6 +49,7 @@ const getMp4 = async (seekingTimeFormatted, durationFormatted, sourceUrl) => {
         "copy",
         join(process.cwd(), "out.mp4"),
     ]);
+    console.log(makeMp4Command);
     return new Promise((resolve, reject) => {
         exec(makeMp4Command, (err) => {
             if (err) {
@@ -63,7 +64,7 @@ const getMp4 = async (seekingTimeFormatted, durationFormatted, sourceUrl) => {
 
 const getGif = async () => {
     const makeGifCommand = shell([
-        FFMPEG_PATH,
+        `${FFMPEG_PATH}`,
         "-y",
         "-i",
         join(process.cwd(), "out.mp4"),
@@ -73,6 +74,7 @@ const getGif = async () => {
         0,
         join(process.cwd(), "out.gif"),
     ]);
+
     return new Promise((resolve, reject) => {
         exec(makeGifCommand, (err) => {
             if (err) {

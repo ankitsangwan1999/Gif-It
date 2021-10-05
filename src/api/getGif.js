@@ -4,7 +4,7 @@ import download from "downloadjs";
 // TODO: ISSUE: Make these 2 values available from .env file as REACT_APP_BACKEND_ORIGIN_DEV, REACT_APP_BACKEND_ORIGIN_PROD
 let ROOT_URL = process.env.REACT_APP_BACKEND_ORIGIN_DEV;
 if (process.env.NODE_ENV === "production") {
-    ROOT_URL = "https://gif-it-now.herokuapp.com";
+    ROOT_URL = process.env.REACT_APP_BACKEND_ORIGIN_PROD;
 }
 
 /**
