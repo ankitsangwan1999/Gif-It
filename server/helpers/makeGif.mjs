@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 let FFMPEG_PATH = "";
+const FFMPEG_MP4_TO_GIF = process.env.FFMPEG_MP4_TO_GIF;
 if (process.env.NODE_ENV === "production") {
     FFMPEG_PATH = process.env.FFMPEG_PATH_PROD;
 } else {
@@ -34,20 +35,11 @@ const getSourceUrl = async (watchUrl) => {
 };
 
 const getMp4 = async (seekingTimeFormatted, durationFormatted, sourceUrl) => {
-    const makeMp4Command = shell([
-        `${FFMPEG_PATH}`,
-        "-y",
-        "-ss",
-        seekingTimeFormatted,
-        "-i",
-        `${sourceUrl}`,
-        "-t",
-        durationFormatted,
-        "-codec",
-        "copy",
-        join(process.cwd(), "out.mp4"),
-    ]);
-    console.log(makeMp4Command);
+    const makeMp4Command = `'${FFMPEG_PATH}' -y -ss "${seekingTimeFormatted}" -i "${sourceUrl}" -t "${durationFormatted}" -codec copy "${join(
+        process.cwd(),
+        "out.mp4"
+    )}"`;
+
     return new Promise((resolve, reject) => {
         exec(makeMp4Command, (err) => {
             if (err) {
@@ -61,18 +53,7 @@ const getMp4 = async (seekingTimeFormatted, durationFormatted, sourceUrl) => {
 };
 
 const getGif = async () => {
-    const makeGifCommand = shell([
-        `${FFMPEG_PATH}`,
-        "-y",
-        "-i",
-        join(process.cwd(), "out.mp4"),
-        "-vf",
-        "fps=20,scale=500:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse",
-        "-loop",
-        0,
-        join(process.cwd(), "out.gif"),
-    ]);
-
+    const makeGifCommand = `'${FFMPEG_PATH}' ${FFMPEG_MP4_TO_GIF}`;
     return new Promise((resolve, reject) => {
         exec(makeGifCommand, (err) => {
             if (err) {
