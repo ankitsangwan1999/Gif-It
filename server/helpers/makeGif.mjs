@@ -43,8 +43,6 @@ const getMp4 = async (seekingTimeFormatted, durationFormatted, sourceUrl) => {
         `${sourceUrl}`,
         "-t",
         durationFormatted,
-        "-f",
-        "h264",
         "-codec",
         "copy",
         join(process.cwd(), "out.mp4"),
