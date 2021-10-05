@@ -5,7 +5,12 @@ import dotenv from "dotenv";
 const __dirname = path.resolve(); // __dirname here represent the absolute path to the root of the Project
 dotenv.config();
 const app = express();
+
+/**
+ * Check All env vars currently Used
+ */
 console.log(process.env);
+
 /**
  *
  * @param {*} seconds
