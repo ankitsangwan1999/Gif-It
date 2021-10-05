@@ -1,16 +1,11 @@
 import express from "express";
-import youtubedl from "youtube-dl-exec";
-import ffmpeg_cli from "ffmpeg-cli";
-import shell from "any-shell-escape";
-import { exec } from "child_process";
-import path, { join } from "path"; // __dirname here represent the absolute path to the root of the Project
+import path from "path";
+import makeGif from "./helpers/makeGif.mjs";
 import dotenv from "dotenv";
-
-import pathToFfmpeg from "ffmpeg-static";
-const __dirname = path.resolve();
+const __dirname = path.resolve(); // __dirname here represent the absolute path to the root of the Project
 dotenv.config();
 const app = express();
-
+console.log(process.env);
 /**
  *
  * @param {*} seconds
@@ -26,32 +21,18 @@ const getFormatedTimeInput = (seconds) => {
     return `${hrs}:${mins}:${secs}`;
 };
 
-/**
- *
- * @param {*} url i.e. source url for the video given by youtubedl
- * @param {*} seekingTimeFormatted i.e. time where the gif should start
- * @param {*} durationFormatted i.e. the duration of the gif
- * @returns The Command to be run by ffmpeg_cli
- */
-const getCommandToRunWithFFMPEG = (
-    url,
-    seekingTimeFormatted,
-    durationFormatted
-) => {
-    return `-y -ss ${seekingTimeFormatted} -i '${url}' -t ${durationFormatted} -f h264 -codec copy out.mp4`;
-};
-
 app.get("/gifit", (req, res) => {
     if (process.env.NODE_ENV === "production") {
         res.set({
             "Content-Type": "image/jpg", // mime-type for gif file
-            "Content-Disposition": "attachment;filename='GifIt.gif'", // Making the File donwloadable
+            "Content-Disposition": "attachment;filename=GifIt.gif", // Making the File donwloadable
         });
     } else {
+        // TODO: ISSUE: Get the front-end origin(Where react-app is running) from .env file(REACT_APP_ORIGIN)
         res.set({
-            "Access-Control-Allow-Origin": "http://localhost:3000", // Origin where React App is running, to Allow Cross-Origin receiving of response sent from here.
+            "Access-Control-Allow-Origin": process.env.REACT_APP_ORIGIN, // Origin where React App is running, to Allow Cross-Origin receiving of response sent from here.
             "Content-Type": "image/jpg", // mime-type for gif file
-            "Content-Disposition": "attachment;filename='GifIt.gif'", // Making the File donwloadable
+            "Content-Disposition": "attachment;filename=GifIt.gif", // Making the File donwloadable
         });
     }
 
@@ -65,9 +46,6 @@ app.get("/gifit", (req, res) => {
      * const seekingTime = 5;
      * const duration = 10;
      */
-    // const watchUrl = "http://www.youtube.com/watch?v=jeaTOlDATzg";
-    // const seekingTime = 5;
-    // const duration = 10;
 
     const seekingTimeFormatted = getFormatedTimeInput(seekingTime);
     const durationFormatted = getFormatedTimeInput(duration);
@@ -79,99 +57,20 @@ app.get("/gifit", (req, res) => {
         durationFormatted
     );
 
-    youtubedl(watchUrl, {
-        dumpSingleJson: true,
-        noWarnings: true,
-        noCallHome: true,
-        noCheckCertificate: true,
-        preferFreeFormats: true,
-        youtubeSkipDashManifest: true,
-        f: "mp4",
-    })
-        .then(async (output) => {
-            console.log("LOG: Got the Source URL. Getting the gif now...");
-            const url = output.url;
-            const cmd = getCommandToRunWithFFMPEG(
-                url,
-                seekingTimeFormatted,
-                durationFormatted
-            );
-            try {
-                /**
-                 * FFMPEG usage Starts
-                 */
-                const makeMp4 = shell([
-                    "ffmpeg",
-                    "-y",
-                    "-ss",
-                    seekingTimeFormatted,
-                    "-i",
-                    `${url}`,
-                    "-t",
-                    durationFormatted,
-                    "-f",
-                    "h264",
-                    "-codec",
-                    "copy",
-                    join(process.cwd(), "out.mp4"),
-                ]);
-                exec(makeMp4, (err) => {
-                    if (err) {
-                        console.error("LOG: Here's the Error1:", err);
-                    } else {
-                        const makeGif = shell([
-                            "ffmpeg",
-                            "-y",
-                            "-i",
-                            join(process.cwd(), "out.mp4"),
-                            "-vf",
-                            "fps=20,scale=500:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse",
-                            "-loop",
-                            0,
-                            join(process.cwd(), "out.gif"),
-                        ]);
-                        exec(makeGif, (err) => {
-                            if (err) {
-                                console.error("LOG: Here's the Error2:", err);
-                            } else {
-                                console.info("LOG: DONE");
-                                console.log("LOG: Got the gif.");
-                                res.sendFile(
-                                    "out.gif",
-                                    { root: __dirname },
-                                    (err) => {
-                                        console.log(
-                                            "LOG: Success: Sent the Output Gif File.",
-                                            err
-                                        );
-                                    }
-                                );
-                            }
-                        });
-                    }
-                });
-                // `-y -ss ${seekingTimeFormatted} -i '${url}' -t ${durationFormatted} -f h264 -codec copy out.mp4`;
-                // await ffmpeg_cli.run(cmd);
-                // console.log("LOG: PART: 1 Done");
-                // await ffmpeg_cli.run(
-                //     `-y -i out.mp4 -vf "fps=20,scale=500:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 out.gif`
-                // );
-
-                /**
-                 * FFMPEG usage Ends
-                 */
-            } catch (err) {
-                console.log("LOG: Error: Probably in ffmpeg_cli:", err);
-                res.sendFile("fail.gif", { root: __dirname }, (err) => {
-                    console.log(
-                        "LOG: Error: Failed Sending the Output Gif File."
-                    );
-                });
-            }
+    makeGif(watchUrl, seekingTimeFormatted, durationFormatted)
+        .then(() => {
+            res.sendFile("out.gif", { root: __dirname }, (err) => {
+                if (err) {
+                    console.log("LOG: Error: Couldn't Send the File");
+                } else {
+                    console.log("LOG: Success: Sent the Output Gif File.");
+                }
+            });
         })
-        .catch((e) => {
-            console.log("LOG: Error: Bad Api Call", e);
-            res.send("LOG: Error: Bad Api Call " + e);
+        .catch((err) => {
+            res.sendFile("fail.gif", { root: __dirname }, (err) => {
+                console.log("LOG: Error: Sent the fail.gif File.", err);
+            });
         });
 });
 
@@ -183,6 +82,8 @@ if (process.env.NODE_ENV === "production") {
             console.log("LOG: index.html folder is served.");
         });
     });
+} else {
+    console.log("LOG: Running in Development.");
 }
 
 const port = process.env.PORT || 5000;
