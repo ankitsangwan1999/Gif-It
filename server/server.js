@@ -1,11 +1,14 @@
 import express from "express";
 import youtubedl from "youtube-dl-exec";
 import ffmpeg_cli from "ffmpeg-cli";
-import path from "path"; // __dirname here represent the absolute path to the root of the Project
+import shell from "any-shell-escape";
+import { exec } from "child_process";
+import path, { join } from "path"; // __dirname here represent the absolute path to the root of the Project
 import dotenv from "dotenv";
+
+import pathToFfmpeg from "ffmpeg-static";
 const __dirname = path.resolve();
 dotenv.config();
-
 const app = express();
 
 /**
@@ -62,6 +65,9 @@ app.get("/gifit", (req, res) => {
      * const seekingTime = 5;
      * const duration = 10;
      */
+    // const watchUrl = "http://www.youtube.com/watch?v=jeaTOlDATzg";
+    // const seekingTime = 5;
+    // const duration = 10;
 
     const seekingTimeFormatted = getFormatedTimeInput(seekingTime);
     const durationFormatted = getFormatedTimeInput(duration);
@@ -91,15 +97,69 @@ app.get("/gifit", (req, res) => {
                 durationFormatted
             );
             try {
-                await ffmpeg_cli.run(cmd);
-                console.log("LOG: PART: 1 Done");
-                await ffmpeg_cli.run(
-                    `-y -i out.mp4 -vf "fps=20,scale=500:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 out.gif`
-                );
-                console.log("LOG: Got the gif.");
-                res.sendFile("out.gif", { root: __dirname }, (err) => {
-                    console.log("LOG: Success: Sent the Output Gif File.", err);
+                /**
+                 * FFMPEG usage Starts
+                 */
+                const makeMp4 = shell([
+                    "ffmpeg",
+                    "-y",
+                    "-ss",
+                    seekingTimeFormatted,
+                    "-i",
+                    `${url}`,
+                    "-t",
+                    durationFormatted,
+                    "-f",
+                    "h264",
+                    "-codec",
+                    "copy",
+                    join(process.cwd(), "out.mp4"),
+                ]);
+                exec(makeMp4, (err) => {
+                    if (err) {
+                        console.error("LOG: Here's the Error1:", err);
+                    } else {
+                        const makeGif = shell([
+                            "ffmpeg",
+                            "-y",
+                            "-i",
+                            join(process.cwd(), "out.mp4"),
+                            "-vf",
+                            "fps=20,scale=500:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse",
+                            "-loop",
+                            0,
+                            join(process.cwd(), "out.gif"),
+                        ]);
+                        exec(makeGif, (err) => {
+                            if (err) {
+                                console.error("LOG: Here's the Error2:", err);
+                            } else {
+                                console.info("LOG: DONE");
+                                console.log("LOG: Got the gif.");
+                                res.sendFile(
+                                    "out.gif",
+                                    { root: __dirname },
+                                    (err) => {
+                                        console.log(
+                                            "LOG: Success: Sent the Output Gif File.",
+                                            err
+                                        );
+                                    }
+                                );
+                            }
+                        });
+                    }
                 });
+                // `-y -ss ${seekingTimeFormatted} -i '${url}' -t ${durationFormatted} -f h264 -codec copy out.mp4`;
+                // await ffmpeg_cli.run(cmd);
+                // console.log("LOG: PART: 1 Done");
+                // await ffmpeg_cli.run(
+                //     `-y -i out.mp4 -vf "fps=20,scale=500:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop 0 out.gif`
+                // );
+
+                /**
+                 * FFMPEG usage Ends
+                 */
             } catch (err) {
                 console.log("LOG: Error: Probably in ffmpeg_cli:", err);
                 res.sendFile("fail.gif", { root: __dirname }, (err) => {
