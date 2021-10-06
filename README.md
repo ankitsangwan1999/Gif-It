@@ -35,7 +35,7 @@ Step-3:
 > Set the *'Starting Time'* of the Video in seconds
 
 Step-4:
-> Set the *'Duration'* for the Gif in 
+> Set the *'Duration'* for the Gif in seconds
 
 Step-5:
 > Click on *'Gif-It Now!'* and wait till you get the Gif File downloaded from the Server.
