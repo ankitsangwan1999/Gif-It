@@ -9,7 +9,7 @@ For [ContriHUB-21](http://contrihub21.herokuapp.com/)
 Currently FFMPEG is being used as a binary(same as on LINUX) and executing the commands on the Shell with the help of the node-server. Part of the process was to get the source url of the Youtube Video which is done using youtube-dl-exec library. So, As a result
 Process of converting and fetching the gif from the server is slower, sometimes Request may Time Out as Heroku has limit of 30 seconds of until Timed Out Responses.
 
-**NOTE**: Future prospects are to make this completely Client Side. [Live Demo](https://gif-it-now.herokuapp.com) for basic functionality.
+**NOTE**: Future prospects are to make this completely Client Side. See [Live Demo](https://gif-it-now.herokuapp.com) for basic functionality.
 
 Special Mention: [Aman Tibrewal](https://github.com/amantibrewal310) for suggesting youtube-dl.
 
@@ -51,3 +51,6 @@ Yes. Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Where to add the contributors name for [ContriHUB-21](http://contrihub21.herokuapp.com/)?
 Inside [CONTRIBUTORS.md](CONTRIBUTORS.md) file.
+
+## Mentor(s)
+* [Ankit Sangwan](https://github.com/ankitsangwan1999)
