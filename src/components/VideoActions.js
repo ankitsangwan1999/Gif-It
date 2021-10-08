@@ -10,13 +10,6 @@ const VideoActions = ({
 }) => {
     return (
         <div className="VideoActions">
-            {/* <button
-                onClick={(e) => {
-                    showVideoDescription(e);
-                }}
-            >
-                Description
-            </button> */}
             <details>
                 <summary><b>Description</b></summary>
                 <p className="VideoDescriptionPara">{videoDetails.video.snippet.description}</p>
