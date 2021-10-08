@@ -27,6 +27,7 @@ const EditControls = ({ videoDetails, setVideoDetails }) => {
                                 type="number"
                                 min="0"
                                 defaultValue="0"
+                                autoFocus
                             />
                         </td>
                     </tr>
