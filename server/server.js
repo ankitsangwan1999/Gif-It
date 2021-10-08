@@ -33,7 +33,6 @@ app.get("/gifit", (req, res) => {
             "Content-Disposition": "attachment;filename=GifIt.gif", // Making the File donwloadable
         });
     } else {
-        // TODO: ISSUE: Get the front-end origin(Where react-app is running) from .env file(REACT_APP_ORIGIN)
         res.set({
             "Access-Control-Allow-Origin": process.env.REACT_APP_ORIGIN, // Origin where React App is running, to Allow Cross-Origin receiving of response sent from here.
             "Content-Type": "image/jpg", // mime-type for gif file
