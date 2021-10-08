@@ -5,9 +5,12 @@ import "../styles/VideoSuggestions.css";
 const VideoSuggestions = ({ videosList }) => {
     return (
         <div className="VideoSuggestions">
-            {videosList.map((video) => (
-                <VideoListItem key={video.etag} videoItem={video} />
-            ))}
+            {videosList.map((video, index) => {
+                return index > 0 ?
+                    < VideoListItem key={video.etag} videoItem={video} />
+                    :
+                    <div></div>
+            })}
         </div>
     );
 };
