@@ -19,7 +19,7 @@ const VideoActions = ({
             </button> */}
             <details>
                 <summary><b>Description</b></summary>
-                <p style={{'margin': '0.5em 1em'}}>{videoDetails.video.snippet.description}</p>
+                <p className="VideoDescriptionPara">{videoDetails.video.snippet.description}</p>
             </details>
             {showEditControls === true ? (
                 <button
@@ -37,7 +37,7 @@ const VideoActions = ({
                 </button>
             ) : (
                 <button
-                    style={{'margin': '1em 1em', 'padding': '0.5em 0', 'fontSize': '1rem'}}
+                    className="GifItButton"
                     onClick={(e) => {
                         setShowEditControls(true);
                     }}
