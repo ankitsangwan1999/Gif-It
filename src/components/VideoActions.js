@@ -3,24 +3,17 @@ import "../styles/VideoActions.css";
 
 // TODO: ISSUE: Style the buttons used in this Component
 const VideoActions = ({
+    videoDetails,
     setVideoDetails,
     showEditControls,
     setShowEditControls,
 }) => {
-    const showVideoDescription = (e) => {
-        alert(
-            "Issue: Make a Collapsible Paragraph(having description of the video) and show/hide it as this button is Clicked."
-        );
-    };
     return (
         <div className="VideoActions">
-            <button
-                onClick={(e) => {
-                    showVideoDescription(e);
-                }}
-            >
-                Description
-            </button>
+            <details>
+                <summary><b>Description</b></summary>
+                <p className="VideoDescriptionPara">{videoDetails.video.snippet.description}</p>
+            </details>
             {showEditControls === true ? (
                 <button
                     onClick={(e) => {
@@ -37,11 +30,12 @@ const VideoActions = ({
                 </button>
             ) : (
                 <button
+                    className="GifItButton"
                     onClick={(e) => {
                         setShowEditControls(true);
                     }}
                 >
-                    Use Video for making Gif
+                    Use Video For Making GIF
                 </button>
             )}
         </div>
