@@ -3,24 +3,55 @@
 }
 
 .SearchBar input{
-    border: 1px solid black;
+    border: 1px solid #BEBEBE;
     border-right: none;
-}
-input {
+    height:40%;
     width: 40%;
     padding: 0.7%;
-    padding-bottom: 0.5%;
+    border-radius: 5px 0 0 5px;
+    border-right: none;
     font-size: large;
+    outline: none;
 }
 
-input:focus{
-    outline-color: blue;  
-    box-shadow: 0px 0px 5px rgba(83, 83, 226, 0.6) inset;
+#cross{
+    position: relative;
+    bottom: 5%;
+    opacity: 0.7;
+    height: 41%;
+    border-top: 1px solid #BEBEBE;
+    border-bottom: 1px solid #BEBEBE;
+    padding: 0.6%; 
+    padding-bottom: 0.65%;
+    margin: 0%;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+
+#cross img{
+    height: 45%;
+    vertical-align: middle;
+}
+
+.SearchBar input:focus{
+    border: 1px solid #1c62b9;  
+    border-right: none;
+    /* box-shadow: -3px 0px 5px 1px rgba(83, 83, 226, 0.6); */
+}
+
+.SearchBar input:focus + #cross{
+    border: 1px solid #1c62b9;  
+    border-left: none;  
+    /* box-shadow: 3px 0px 5px 1px rgba(83, 83, 226, 0.4); */
 }
 
 .SearchBar button{
-    padding: 0.5% 1%;
+    position: relative;
+    top: 5%;
+    padding: 0.5%;
     margin: 0;
+    border: 1px solid #BEBEBE;
+    border-radius: 0 5px 5px 0;
     height: auto;
     cursor: pointer;
 }

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import YTSearch from "youtube-api-search";
 
 import "../styles/SearchBar.css";
@@ -27,14 +27,35 @@ const SearchBar = ({ setVideosList }) => {
         }
     };
 
+    const clearText = () => {
+        document.querySelector('#search').value = '';
+    };
+
+    useEffect(() => {
+        const listener = event => {
+          if (event.code === "Enter") {
+            event.preventDefault();
+            document.querySelector('button').click();
+          }
+        };
+        document.addEventListener("keydown", listener);
+        return () => {
+          document.removeEventListener("keydown", listener);
+        };
+      }, []);
+
     return (
         <div className="SearchBar">
             <input
                 type="text"
+                id="search"
                 placeholder="Search"
                 ref={inputSearch}
                 autoFocus
             />
+            <span id="cross">
+                <img src="https://img.icons8.com/material-rounded/24/000000/delete-sign.png" onClick={clearText}/>
+            </span>
             <button
                 type="submit"
                 // style={{ marginLeft: "5px" }}
