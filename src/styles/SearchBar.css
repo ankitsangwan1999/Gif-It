@@ -9,5 +9,5 @@ input {
 
 input:focus{
     outline-color: blue;  
-    box-shadow: 0px 0px 5px rgba(83, 83, 226, 0.6);
+    box-shadow: 0px 0px 5px rgba(83, 83, 226, 0.6) inset;
 }
