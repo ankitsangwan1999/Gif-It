@@ -1,5 +1,36 @@
-.Footer {
-    margin-top: auto;
-    border: 1px dashed rgb(43, 71, 228);
-    padding: 10px;
+body{
+    margin: 0;
+    padding: 0;
 }
+
+.footer{
+    position: fixed;
+    width: 100%;
+    bottom: 8px;
+}
+
+.outer-footer{
+    font-variant: petite-caps;
+    margin: -8px 0px;
+    padding: 13px;
+    text-align: center;
+    color: rgb(234, 239, 229);
+    font-size: 18px;
+    background-color: rgb(16, 16, 16);
+    border-radius: 9px;
+    font-family: inherit;
+}
+
+.outer-footer a {
+    color: #f7f9fd;
+    text-decoration: none;
+}
+
+.outer-footer a:hover {
+    color: rgb(238, 238, 218);
+    text-decoration: underline;
+}
+
+
+
+
