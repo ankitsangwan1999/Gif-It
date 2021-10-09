@@ -33,6 +33,7 @@ const SearchBar = ({ setVideosList }) => {
                 type="text"
                 placeholder="Search Video..."
                 ref={inputSearch}
+                autoFocus
             />
             <button
                 type="submit"

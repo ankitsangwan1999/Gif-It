@@ -2,3 +2,7 @@
     padding: 10px;
     flex-grow: 1;
 }
+
+.EditControls input{
+    padding: 2%;
+}
