@@ -9,25 +9,9 @@ const EditControls = ({ videoDetails, setVideoDetails }) => {
     const startRef = useRef(null); // ref for the start-time input element
     const videoClipDurationRef = useRef(null); // ref for video-clip-duration input element
 
-    const checkStartTimer = () => {
-        // checking for bad timings of the start value of timer
-        if(startRef.current.value >= 0 && startRef.current.value < videoDetails.videoDuration) {
-            setVideoDetails((prev) => {
-                return {
-                    ...prev,
-                    start: startRef.current.value,
-                    videoClipDuration:
-                        videoClipDurationRef.current
-                            .value,
-                    isPreview: false,
-                    shouldCreateGif: true,
-                };
-            });
-        }
-        else {
-            alert("Invalid start time of the GIF!!\nThe start time should be in range of the video duration!")
-            startRef.current.value = 0;
-        }
+    const showInvalidPrompt = () => {
+        alert("Invalid start time!!\nThe start time should be in range of the video duration!")
+        startRef.current.value = 0;
     }
 
     return (
@@ -70,17 +54,20 @@ const EditControls = ({ videoDetails, setVideoDetails }) => {
                         <td>
                             <button
                                 onClick={(e) => {
-                                    setVideoDetails((prev) => {
-                                        return {
-                                            ...prev,
-                                            start: startRef.current.value,
-                                            videoClipDuration:
-                                                videoClipDurationRef.current
-                                                    .value,
-                                            isPreview: true,
-                                            shouldCreateGif: false,
-                                        };
-                                    });
+                                    if(startRef.current.value >= 0 && startRef.current.value < videoDetails.videoDuration) {
+                                        setVideoDetails((prev) => {
+                                            return {
+                                                ...prev,
+                                                start: startRef.current.value,
+                                                videoClipDuration:
+                                                    videoClipDurationRef.current
+                                                        .value,
+                                                isPreview: true,
+                                                shouldCreateGif: false,
+                                            };
+                                        });
+                                    } else 
+                                        showInvalidPrompt();
                                 }}
                             >
                                 Show Preview
@@ -88,7 +75,22 @@ const EditControls = ({ videoDetails, setVideoDetails }) => {
                         </td>
                         <td>
                             <button
-                                onClick={checkStartTimer}
+                                onClick={(e) => {
+                                    if(startRef.current.value >= 0 && startRef.current.value < videoDetails.videoDuration) {
+                                        setVideoDetails((prev) => {
+                                            return {
+                                                ...prev,
+                                                start: startRef.current.value,
+                                                videoClipDuration:
+                                                    videoClipDurationRef.current
+                                                        .value,
+                                                isPreview: false,
+                                                shouldCreateGif: true,
+                                            };
+                                        });
+                                    } else 
+                                        showInvalidPrompt();
+                                }}
                             >
                                 Gif-It Now!
                             </button>
