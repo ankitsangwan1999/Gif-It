@@ -31,16 +31,16 @@ const SearchBar = ({ setVideosList }) => {
         <div className="SearchBar">
             <input
                 type="text"
-                placeholder="Search Video..."
+                placeholder="Search"
                 ref={inputSearch}
                 autoFocus
             />
             <button
                 type="submit"
-                style={{ marginLeft: "5px" }}
+                // style={{ marginLeft: "5px" }}
                 onClick={(e) => handleSearchClick(e)}
             >
-                Search
+                <img src="https://img.icons8.com/ios-glyphs/50/000000/search.png" height="40%" width="40%"/>
             </button>
         </div>
     );
