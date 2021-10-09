@@ -54,7 +54,7 @@ const EditControls = ({ videoDetails, setVideoDetails }) => {
                         <td>
                             <button
                                 onClick={(e) => {
-                                    if(startRef.current.value >= 0 && startRef.current.value < videoDetails.videoDuration) {
+                                    if(startRef.current.value >= 0 && startRef.current.value <= videoDetails.videoDuration) {
                                         setVideoDetails((prev) => {
                                             return {
                                                 ...prev,
@@ -76,7 +76,7 @@ const EditControls = ({ videoDetails, setVideoDetails }) => {
                         <td>
                             <button
                                 onClick={(e) => {
-                                    if(startRef.current.value >= 0 && startRef.current.value < videoDetails.videoDuration) {
+                                    if(startRef.current.value >= 0 && startRef.current.value <= videoDetails.videoDuration) {
                                         setVideoDetails((prev) => {
                                             return {
                                                 ...prev,
