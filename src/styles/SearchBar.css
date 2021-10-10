@@ -2,12 +2,65 @@
     text-align: center;
 }
 
-input {
-    width: 60%;
-    padding: 0.5%;
+.SearchBar input{
+    border: 1px solid #BEBEBE;
+    width: 45%;
+    padding: 0.7%;
+    margin: 0%;
+    border-radius: 5px 0 0 5px;
+    border-right: none;
+    font-size: large;
+    outline: none;
 }
 
-input:focus{
-    outline-color: blue;  
-    box-shadow: 0px 0px 5px rgba(83, 83, 226, 0.6) inset;
+#clear-icon {
+    position: relative;
+    top: 5%;
+    right: 2.3%;
+    margin:0%;
+    height: 35%;
+    cursor: pointer;
+    visibility: hidden;
+  }
+
+.SearchBar input:focus{
+    border: 1px solid #1c62b9; 
+    box-shadow: 0px 0px 5px rgba(83, 83, 226, 0.6) inset; 
+}
+
+.SearchBar button{
+    transform: translateX(-39%) translateY(5%);
+    padding: 0.5% 1.3%;
+    margin: 0%;
+    height: 98%;
+    border: 1px solid #BEBEBE;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+@media (max-width: 1200px) {
+    .SearchBar button{
+        transform: translateX(-50%) translateY(3%); 
+        padding: 0.5% 1.3%;
+        height: 94%;
+        border: 1px solid #BEBEBE;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
+    }
+    #clear-icon {
+        position: relative;
+        top: 2%;
+        right: 3%;
+        height: 35%;
+        cursor: pointer;
+        visibility: hidden;
+    }
+}
+
+.SearchBar button svg{
+    height: 70%;
+}
+
+.SearchBar button:hover{
+    background-color: #E4E4E4;
 }
