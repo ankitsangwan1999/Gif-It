@@ -5,7 +5,7 @@ const Footer = () => {
         <footer class="footer">
             <div class="outer-footer"> 
             <marquee>
-            <a href="https://contrihub.github.io/"> ✌ Made with peace for ContriHUB-21</a>
+            <a href="https://contrihub.github.io/"> ✌ Made with peace for ContriHUB-21 ✌ </a>
             </marquee>
             </div>
            
