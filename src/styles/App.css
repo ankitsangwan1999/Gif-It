@@ -17,3 +17,11 @@
     justify-content: center;
     align-items: center;
 }
+.Hello{
+    display: flex;
+    flex-direction: row;
+    flex-items: center;
+    align-items: center;
+    gap: 120px;
+    
+}

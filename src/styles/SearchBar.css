@@ -1,9 +1,11 @@
 .SearchBar {
+    display: flex;
     text-align: center;
+    flex-basis: 1100px;
 }
 
 input {
-    width: 60%;
+    width: 500%;
     padding: 0.5%;
 }
 
