@@ -1,5 +1,7 @@
 .SearchBar {
-    text-align: center;
+    display: flex;
+    flex-grow: 1;
+    padding: 15px;
 }
 
 .SearchBar input{
