@@ -10,12 +10,12 @@ const VideoActions = ({
 }) => {
     return (
         <div className="VideoActions">
-            <details>
-                <summary className = "btn btn0"><b>Description</b></summary>
+            <details className="btn btn0">
+                <summary><b>Description</b></summary>
                 <p className="VideoDescriptionPara">{videoDetails.video.snippet.description}</p>
             </details>
             {showEditControls === true ? (
-                <button className = "btn btn1"
+                <button className="btn btn1"
                     onClick={(e) => {
                         setVideoDetails((prev) => {
                             return {
@@ -29,7 +29,7 @@ const VideoActions = ({
                     Show Suggestions
                 </button>
             ) : (
-                <button className = "btn btn2"
+                <button className="btn btn2"
                     onClick={(e) => {
                         setShowEditControls(true);
                     }}
