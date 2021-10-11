@@ -1,33 +1,25 @@
-body{
+.body{
     margin: 0;
     padding: 0;
 }
 
 .footer{
-    position: fixed;
-    width: 100%;
-    bottom: 8px;
+    margin-top: auto;
 }
 
 .outer-footer{
-    font-variant: petite-caps;
-    margin: -8px 0px;
-    padding: 13px;
-    text-align: center;
-    color: rgb(234, 239, 229);
-    font-size: 18px;
+    padding: 13px; 
     background-color: rgb(16, 16, 16);
-    border-radius: 9px;
-    font-family: inherit;
 }
 
 .outer-footer a {
     color: #f7f9fd;
+    font-size: 21px;
     text-decoration: none;
 }
 
 .outer-footer a:hover {
-    color: rgb(238, 238, 218);
+    color: rgb(179, 241, 160);
     text-decoration: underline;
 }
 
