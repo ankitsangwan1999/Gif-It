@@ -18,9 +18,9 @@
     align-items: center;
 }
 
-.Header-Search-Container{
+.Header-Search-Container {
     display: flex;
+    gap: 10%;
     flex-direction: row;
     align-items: center;
-    gap: 10%;
 }
