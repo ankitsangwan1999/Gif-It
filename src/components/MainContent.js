@@ -6,6 +6,7 @@ import VideoSuggestions from "./VideoSuggestions.js";
 import getGif from "../api/getGif.js";
 import "../styles/MainContent.css";
 import LoadingGif from "../static/loading.gif";
+import Loader from "react-loader-spinner";
 
 const MainContent = ({ videosList }) => {
     const [showEditControls, setShowEditControls] = useState(false);
@@ -90,9 +91,9 @@ const MainContent = ({ videosList }) => {
                     <img src={LoadingGif} className='MainContentLoader' alt="Loading..." />
                 </div>
             ) : videoDetails.shouldCreateGif === true ? (
-                // TODO: ISSUE: Animate this loader (+5 for creativity)
                 <div className="MainContentLoading">
-                    <div>Making Gif in Progress...</div>
+                <Loader type="Bars" color="red" secondaryColor="black" height={40} width={40} />
+                <p>Making Gif in Progress...</p>
                 </div>
             ) : (
                 <div className="MainContent">
