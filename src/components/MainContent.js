@@ -5,6 +5,7 @@ import EditControls from "./EditControls.js";
 import VideoSuggestions from "./VideoSuggestions.js";
 import getGif from "../api/getGif.js";
 import "../styles/MainContent.css";
+import LoadingGif from "../static/loading.gif";
 
 const MainContent = ({ videosList }) => {
     const [showEditControls, setShowEditControls] = useState(false);
@@ -86,8 +87,7 @@ const MainContent = ({ videosList }) => {
         <>
             {videoDetails.video === null ? (
                 <div className="MainContentLoading">
-                    {/* TODO: ISSUE: Animate this loader (+5 for creativity) */}
-                    <div>Loading</div>
+                    <img src={LoadingGif} className='MainContentLoader' alt="Loading..." />
                 </div>
             ) : videoDetails.shouldCreateGif === true ? (
                 // TODO: ISSUE: Animate this loader (+5 for creativity)

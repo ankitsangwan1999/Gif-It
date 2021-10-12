@@ -8,3 +8,8 @@
     align-items: center;
     justify-content: space-around;
 }
+
+.MainContentLoader {
+    height: 10rem;
+    width: 10rem;
+}
