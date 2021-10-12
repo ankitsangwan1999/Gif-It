@@ -10,6 +10,7 @@
         "ffmpeg-static": "^4.4.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
+        "react-loader-spinner": "^4.0.0",
         "react-scripts": "4.0.3",
         "react-youtube": "^7.13.1",
         "youtube-api-search": "0.0.5",
