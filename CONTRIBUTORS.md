@@ -10,5 +10,6 @@ Here's to the crazy ones:
     <td align="center"><a href="https://github.com/MojoAlpha"><img src="https://github.com/MojoAlpha.png?v=4?s=100" width="100px;" alt="Mohit Pandey"/><br /><sub><b> Mohit Pandey</b></sub></a><br /></td>
   </tr>
    <td align="center"><a href="https://github.com/gursimran18"><img src="https://github.com/gursimran18.png?v=4?s=100" width="100px;" alt="Gursimran Kaur Saini"/><br /><sub><b>Gursimran Kaur Saini</b></sub></a><br /></td>
+  <td align="center"><a href="https://github.com/VVV007"><img src="https://github.com/VVV007.png?v=4?s=100" width="100px;" alt="Vishwas Vaish"/><br /><sub><b>Vishwas Vaish</b></sub></a><br /></td>
   </tr>
 </table>
