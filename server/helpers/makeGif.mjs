@@ -24,7 +24,7 @@ const getSourceUrl = async (watchUrl) => {
             noCheckCertificate: true,
             preferFreeFormats: true,
             youtubeSkipDashManifest: true,
-            f: "mp4",
+            format: "mp4",
         });
         const sourceUrl = response.url;
         /**
