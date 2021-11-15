@@ -13,7 +13,6 @@ const App = () => {
         <div className="App">
             <Header />
             <SearchBar setVideosList={setVideosList} />
-
             {videosList.length === 0 ? (
                 <div className="NoResults">
                     Search Results will be shown here...

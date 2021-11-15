@@ -2,6 +2,7 @@ import { exec } from "child_process";
 import { join } from "path";
 import youtubedl from "youtube-dl-exec";
 import dotenv from "dotenv";
+import sendEvent from "./sendEvent.mjs";
 dotenv.config();
 
 let FFMPEG_PATH = "";
@@ -60,7 +61,7 @@ const getGif = async () => {
     return new Promise((resolve, reject) => {
         exec(makeGifCommand, (err) => {
             if (err) {
-                console.error("LOG: Error: in getGif");
+                console.error("LOG: Error: in getGif Function");
                 reject(err);
             } else {
                 resolve();
@@ -69,16 +70,38 @@ const getGif = async () => {
     });
 };
 
-const makeGif = async (watchUrl, seekingTimeFormatted, durationFormatted) => {
+const makeGif = async (
+    res,
+    watchUrl,
+    seekingTimeFormatted,
+    durationFormatted
+) => {
     try {
+        // Step: 1
+        sendEvent(res, {
+            message: `Getting the Source Url for the portion of the Video...`,
+            state: "Pending",
+        });
+        if (res.writableEnded) return;
         const sourceUrl = await getSourceUrl(watchUrl);
-        console.log("LOG: Got the Source URL. Making the Mp4 File now...");
+
+        // Step: 2
+        sendEvent(res, {
+            message: `Making the Mp4 File...`,
+            state: "Pending",
+        });
+        if (res.writableEnded) return;
         await getMp4(seekingTimeFormatted, durationFormatted, sourceUrl);
-        console.log("LOG: Generated the Mp4 File. Making it a Gif file now...");
+
+        // Step: 3
+        sendEvent(res, {
+            message: `Making it a Gif File...`,
+            state: "Pending",
+        });
+        if (res.writableEnded) return;
         await getGif();
-        console.log("LOG: Generated the GIf File.");
     } catch (err) {
-        console.log("LOG: HERE:", err);
+        console.log("LOG: From Catch of makeGif:", err);
         return Promise.reject(err);
     }
 };

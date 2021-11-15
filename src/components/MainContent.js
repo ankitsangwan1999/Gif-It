@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Video from "./Video.js";
+import Progress from "./Progress.js";
 import getVideoDetails from "../api/getVideoDetails.js";
 import EditControls from "./EditControls.js";
 import VideoSuggestions from "./VideoSuggestions.js";
-import getGif from "../api/getGif.js";
+import downloadGif from "../api/downloadGif.js";
 import "../styles/MainContent.css";
 
+let PROGRESS_EVENTS_ENDPOINT =
+    process.env.REACT_APP_BACKEND_ORIGIN_DEV + "/gifit";
+if (process.env.NODE_ENV === "production") {
+    PROGRESS_EVENTS_ENDPOINT =
+        process.env.REACT_APP_BACKEND_ORIGIN_DEV + "/gifit";
+}
+
 const MainContent = ({ videosList }) => {
+    const [messages, setMessages] = useState([]);
     const [showEditControls, setShowEditControls] = useState(false);
     const [videoDetails, setVideoDetails] = useState({
         video: null,
@@ -61,19 +70,56 @@ const MainContent = ({ videosList }) => {
         if (videoDetails.shouldCreateGif === true) {
             const videoId = videoDetails.video.id.videoId;
             const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
-            getGif(
-                {
-                    watchUrl: watchUrl,
-                    seekingTime: videoDetails.start,
-                    duration: videoDetails.videoClipDuration,
-                },
-                () => {
-                    // This Function will be called by getGif ffter Gif is Downloaded.
+            const url = `${PROGRESS_EVENTS_ENDPOINT}?seekingTime=${videoDetails.start}&watchUrl=${watchUrl}&duration=${videoDetails.videoClipDuration}`;
+            const eventSrc = new EventSource(url);
+
+            /**
+             * Event handler for when sse-connection receives event-message from server
+             */
+            eventSrc.onmessage = (event) => {
+                const parsedData = JSON.parse(event.data);
+                setMessages((prevState) => [...prevState, parsedData.message]);
+                if (parsedData.state === "Completed") {
+                    setMessages((prevState) => [
+                        ...prevState,
+                        "Downloading...",
+                    ]);
+                    downloadGif({}, () => {
+                        // This Function will be called by getGif after Gif is Downloaded.
+                        setMessages([]);
+                        setVideoDetails((prev) => {
+                            return { ...prev, shouldCreateGif: false };
+                        });
+                    });
+                    eventSrc.close();
+                } else if (parsedData.state === "Failed") {
+                    setMessages([]);
                     setVideoDetails((prev) => {
                         return { ...prev, shouldCreateGif: false };
                     });
+                    eventSrc.close();
+                    alert(parsedData.message);
                 }
-            );
+            };
+
+            /**
+             * Event handler for when sse-connection is just opened.
+             */
+            eventSrc.onopen = (event) => {
+                // console.log("LOG: Open:", event);
+            };
+
+            /**
+             * Event handler for when error occured while connecting with server.
+             */
+            eventSrc.onerror = (event) => {
+                console.log("LOG: Error:", event);
+                eventSrc.close();
+            };
+            return () => {
+                eventSrc.close();
+                console.log("LOG: EventSrc Closed");
+            };
         }
     }, [
         videoDetails.shouldCreateGif,
@@ -92,7 +138,7 @@ const MainContent = ({ videosList }) => {
             ) : videoDetails.shouldCreateGif === true ? (
                 // TODO: ISSUE: Animate this loader (+5 for creativity)
                 <div className="MainContentLoading">
-                    <div>Making Gif in Progress...</div>
+                    <Progress messages={messages} />
                 </div>
             ) : (
                 <div className="MainContent">
