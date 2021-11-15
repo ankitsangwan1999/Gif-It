@@ -11,7 +11,7 @@ let PROGRESS_EVENTS_ENDPOINT =
     process.env.REACT_APP_BACKEND_ORIGIN_DEV + "/gifit";
 if (process.env.NODE_ENV === "production") {
     PROGRESS_EVENTS_ENDPOINT =
-        process.env.REACT_APP_BACKEND_ORIGIN_DEV + "/gifit";
+        process.env.REACT_APP_BACKEND_ORIGIN_PROD + "/gifit";
 }
 
 const MainContent = ({ videosList }) => {
