@@ -1,5 +1,24 @@
-.Footer {
+.body {
+    margin: 0;
+    padding: 0;
+}
+
+.footer {
     margin-top: auto;
-    border: 1px dashed rgb(43, 71, 228);
-    padding: 10px;
+}
+
+.outer-footer {
+    padding: 13px;
+    background-color: rgb(16, 16, 16);
+}
+
+.outer-footer a {
+    color: #f7f9fd;
+    font-size: 21px;
+    text-decoration: none;
+}
+
+.outer-footer a:hover {
+    color: rgb(179, 241, 160);
+    text-decoration: underline;
 }

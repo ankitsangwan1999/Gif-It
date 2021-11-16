@@ -2,6 +2,8 @@
 **Gif-It** - An online tool to Make Gifs from portion of any Any* Youtube Video
 
 *Any\*: Video Playback should be enabled for other sites*
+## Why it exists?
+For [ContriHUB-21](http://contrihub21.herokuapp.com/)
 
 ## How it works?
 Currently FFMPEG is being used as a binary(same as on LINUX) and executing the commands on the Shell with the help of the node-server. Part of the process was to get the source url of the Youtube Video which is done using youtube-dl-exec library. So, As a result
@@ -9,7 +11,6 @@ Process of converting and fetching the gif from the server is slower, sometimes 
 
 **NOTE**: Future prospects are to make this completely Client Side. See [Live Demo](https://gif-it-now.herokuapp.com) for basic functionality.
 
-Special Mention: [Aman Tibrewal](https://github.com/amantibrewal310) for suggesting youtube-dl.
 
 ## How to run it locally?
 1. > ***Clone this repo to your local machine and cd into the Gif-It directory.***
@@ -52,3 +53,5 @@ Inside [CONTRIBUTORS.md](CONTRIBUTORS.md) file.
 
 ## Mentor(s)
 * [Ankit Sangwan](https://github.com/ankitsangwan1999)
+
+Special Mention: [Aman Tibrewal](https://github.com/amantibrewal310) for suggesting youtube-dl.
