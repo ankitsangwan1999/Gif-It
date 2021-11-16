@@ -18,13 +18,13 @@ console.log("LOG: FFMPEG PATH:", FFMPEG_PATH);
 const getSourceUrl = async (watchUrl) => {
     try {
         const response = await youtubedl(watchUrl, {
+            format: "mp4",
             dumpSingleJson: true,
             noWarnings: true,
             noCallHome: true,
             noCheckCertificate: true,
             preferFreeFormats: true,
             youtubeSkipDashManifest: true,
-            f: "mp4",
         });
         const sourceUrl = response.url;
         /**
