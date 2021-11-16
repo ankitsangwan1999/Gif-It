@@ -1,4 +1,13 @@
 .VideoSuggestions {
     width: 40%;
     overflow: auto;
+    padding: 10px;
+    margin-bottom: 5%;
+}
+
+@media (max-width: 450px) {
+    .VideoSuggestions {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }

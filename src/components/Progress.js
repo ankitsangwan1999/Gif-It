@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const Progress = ({ messages }) => {
-    const clocks = ["🕛", "🕒", "🕕", "🕤"];
+    const clocks = ["🕛", "🕒", "🕕", "🕘"];
     const [clock, setClock] = useState("🕛");
     useEffect(() => {
         let i = 0;
