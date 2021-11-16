@@ -2,12 +2,6 @@
     width: 50%;
 }
 
-@media (max-width: 450px) {
-    .Video {
-        width: 100%;
-    }
-}
-
 iframe {
     width: 100%;
     box-sizing: border-box;

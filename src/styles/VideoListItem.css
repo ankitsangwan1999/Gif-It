@@ -1,21 +1,5 @@
 .VideoListItem {
     display: flex;
     padding: 5px;
-    border-radius: 15px;
-    font-family: Comic Sans MS;
-    font-size: large;
-    font-weight: 700;
-    cursor: pointer;
-    margin: 10px 0;
-    transition: 0.2s;
-}
-
-.VideoListItem img {
-    float: left;
-    margin: 0 10px 10px;
-}
-
-.VideoListItem:hover {
-    box-shadow: 0 0 8px 5px rgba(225, 131, 248, 0.7) !important;
-    background-color: rgb(203, 223, 248) !important;
+    align-items: center;
 }

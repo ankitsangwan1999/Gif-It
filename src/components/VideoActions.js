@@ -1,25 +1,28 @@
 import React from "react";
 import "../styles/VideoActions.css";
 
+// TODO: ISSUE: Style the buttons used in this Component
 const VideoActions = ({
-    videoDetails,
     setVideoDetails,
     showEditControls,
     setShowEditControls,
 }) => {
+    const showVideoDescription = (e) => {
+        alert(
+            "Issue: Make a Collapsible Paragraph(having description of the video) and show/hide it as this button is Clicked."
+        );
+    };
     return (
         <div className="VideoActions">
-            <details className="btn btn0">
-                <summary>
-                    <b>Description</b>
-                </summary>
-                <p className="VideoDescriptionPara">
-                    {videoDetails.video.snippet.description}
-                </p>
-            </details>
+            <button
+                onClick={(e) => {
+                    showVideoDescription(e);
+                }}
+            >
+                Description
+            </button>
             {showEditControls === true ? (
                 <button
-                    className="btn btn1"
                     onClick={(e) => {
                         setVideoDetails((prev) => {
                             return {
@@ -34,12 +37,11 @@ const VideoActions = ({
                 </button>
             ) : (
                 <button
-                    className="btn btn2"
                     onClick={(e) => {
                         setShowEditControls(true);
                     }}
                 >
-                    Use Video For Making GIF
+                    Use Video for making Gif
                 </button>
             )}
         </div>

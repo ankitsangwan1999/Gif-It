@@ -6,8 +6,6 @@ import EditControls from "./EditControls.js";
 import VideoSuggestions from "./VideoSuggestions.js";
 import downloadGif from "../api/downloadGif.js";
 import "../styles/MainContent.css";
-import LoadingGif from "../static/loading.gif";
-import Loader from "react-loader-spinner";
 
 let PROGRESS_EVENTS_ENDPOINT =
     process.env.REACT_APP_BACKEND_ORIGIN_DEV + "/gifit";
@@ -134,21 +132,12 @@ const MainContent = ({ videosList }) => {
         <>
             {videoDetails.video === null ? (
                 <div className="MainContentLoading">
-                    <img
-                        src={LoadingGif}
-                        className="MainContentLoader"
-                        alt="Loading..."
-                    />
+                    {/* TODO: ISSUE: Animate this loader (+5 for creativity) */}
+                    <div>Loading</div>
                 </div>
             ) : videoDetails.shouldCreateGif === true ? (
+                // TODO: ISSUE: Animate this loader (+5 for creativity)
                 <div className="MainContentLoading">
-                    <Loader
-                        type="Bars"
-                        color="red"
-                        secondaryColor="black"
-                        height={40}
-                        width={40}
-                    />
                     <Progress messages={messages} />
                 </div>
             ) : (
@@ -160,10 +149,7 @@ const MainContent = ({ videosList }) => {
                         setShowEditControls={setShowEditControls}
                     />
                     {showEditControls === false ? (
-                        <VideoSuggestions
-                            videosList={videosList}
-                            setVideoDetails={setVideoDetails}
-                        />
+                        <VideoSuggestions videosList={videosList} />
                     ) : (
                         <EditControls
                             videoDetails={videoDetails}

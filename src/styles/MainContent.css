@@ -1,12 +1,4 @@
 .MainContent {
-    display: flex;
-    justify-content: space-between;
-}
-
-@media (max-width: 450px) {
-    .MainContent {
-        flex-direction: column;
-    }
 }
 
 .MainContentLoading {
@@ -14,10 +6,5 @@
     flex-direction: column;
     flex-grow: 1;
     align-items: center;
-    margin-top: 5%;
-}
-
-.MainContentLoader {
-    height: 10rem;
-    width: 10rem;
+    justify-content: space-around;
 }

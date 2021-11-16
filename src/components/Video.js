@@ -110,7 +110,6 @@ const Video = ({
             />
             {player !== undefined && (
                 <VideoActions
-                    videoDetails={videoDetails}
                     setVideoDetails={setVideoDetails}
                     showEditControls={showEditControls}
                     setShowEditControls={setShowEditControls}

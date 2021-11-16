@@ -6,7 +6,7 @@ import "../styles/Header.css";
 const Header = () => {
     return (
         <div className="Header">
-            <img id="logo" src={Logo} alt="Gif-It Logo" />
+            <img src={Logo} alt="Gif-It Logo" />
         </div>
     );
 };

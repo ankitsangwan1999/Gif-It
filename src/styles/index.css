@@ -9,8 +9,6 @@ body {
 
 body {
     margin: 0;
-    padding: 1em;
-    box-sizing: border-box;
     font-family: "Cool Font";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
