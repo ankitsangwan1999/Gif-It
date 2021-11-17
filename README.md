@@ -2,8 +2,6 @@
 **Gif-It** - An online tool to Make Gifs from portion of any Any* Youtube Video
 
 *Any\*: Video Playback should be enabled for other sites*
-## Why it exists?
-For [ContriHUB-21](http://contrihub21.herokuapp.com/)
 
 ## How it works?
 Currently FFMPEG is being used as a binary(same as on LINUX) and executing the commands on the Shell with the help of the node-server. Part of the process was to get the source url of the Youtube Video which is done using youtube-dl-exec library. So, As a result
