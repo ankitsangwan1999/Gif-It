@@ -29,16 +29,37 @@ const MainContent = ({ videosList }) => {
     });
 
     const getDurationInSeconds = (duration) => {
-        // e.g. duration = "PT11M52S", "PT1H33M1S"
+        // e.g. duration = "PT11M52S", "PT1H33M1S", "PT3M", "PT1H1S"
         let ans = 0;
-        const list = duration.split(/PT|H|M|S/);
-        list.shift();
-        list.pop();
-        let mul = 1;
-        list.reverse().forEach((element) => {
-            ans = ans + mul * element;
-            mul = mul * 60;
-        });
+
+        let hr = 0,
+            min = 0,
+            sec = 0;
+        let list = duration.split(/PT/);
+        duration = list[1];
+
+        list = duration.split(/H/);
+        if (list.length === 1) duration = list[0];
+        else {
+            duration = list[1];
+            if (list[0] !== "") hr = parseInt(list[0]);
+        }
+
+        list = duration.split(/M/);
+        if (list.length === 1) duration = list[0];
+        else {
+            duration = list[1];
+            if (list[0] !== "") min = parseInt(list[0]);
+        }
+
+        list = duration.split(/S/);
+        if (list.length === 1) duration = list[0];
+        else {
+            duration = list[1];
+            if (list[0] !== "") sec = parseInt(list[0]);
+        }
+
+        ans = sec + min * 60 + hr * 60 * 60;
         return ans;
     };
 
