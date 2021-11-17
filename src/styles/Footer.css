@@ -1,24 +1,7 @@
-.body {
-    margin: 0;
-    padding: 0;
-}
-
 .footer {
+    text-align: center;
     margin-top: auto;
-}
-
-.outer-footer {
-    padding: 13px;
-    background-color: rgb(16, 16, 16);
-}
-
-.outer-footer a {
-    color: #f7f9fd;
-    font-size: 21px;
-    text-decoration: none;
-}
-
-.outer-footer a:hover {
-    color: rgb(179, 241, 160);
-    text-decoration: underline;
+    padding: 1em;
+    background-color: rgb(0, 0, 0);
+    color: white;
 }

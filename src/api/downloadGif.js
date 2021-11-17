@@ -1,5 +1,7 @@
 import axios from "axios";
 import download from "downloadjs";
+import { toast } from "react-toastify";
+toast.configure();
 
 let ROOT_URL = process.env.REACT_APP_BACKEND_ORIGIN_DEV;
 if (process.env.NODE_ENV === "production") {
@@ -33,7 +35,9 @@ const downloadGif = (params = {}, callback) => {
             callback();
         })
         .catch(function (error) {
-            alert("There was an error downloading the Gif. Try Again.");
+            toast.error(() => (
+                <div>There was an error downloading the Gif. Try Again.</div>
+            ));
             console.error("LOG: Error in Downloading:", error);
             callback();
         });

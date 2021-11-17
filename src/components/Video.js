@@ -81,7 +81,7 @@ const Video = ({
 
                 /**
                  * Starting a new Timer for the rest of the Time Remaining
-                 * 0.4 is just a thesold value for accounting slight delay in actual/practical play/pause operation
+                 * 0.4 is just a threshold value for accounting slight delay in actual/practical play/pause operation
                  */
                 currentTimer = setTimeout(() => {
                     player.pauseVideo();

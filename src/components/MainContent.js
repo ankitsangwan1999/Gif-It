@@ -7,7 +7,8 @@ import VideoSuggestions from "./VideoSuggestions.js";
 import downloadGif from "../api/downloadGif.js";
 import "../styles/MainContent.css";
 import LoadingGif from "../static/loading.gif";
-import Loader from "react-loader-spinner";
+import { toast } from "react-toastify";
+toast.configure();
 
 let PROGRESS_EVENTS_ENDPOINT =
     process.env.REACT_APP_BACKEND_ORIGIN_DEV + "/gifit";
@@ -93,7 +94,11 @@ const MainContent = ({ videosList }) => {
         if (videoDetails.shouldCreateGif === true) {
             const videoId = videoDetails.video.id.videoId;
             const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
-            const url = `${PROGRESS_EVENTS_ENDPOINT}?seekingTime=${videoDetails.start}&watchUrl=${watchUrl}&duration=${videoDetails.videoClipDuration}`;
+            const url = `${PROGRESS_EVENTS_ENDPOINT}?seekingTime=${
+                videoDetails.start
+            }&watchUrl=${watchUrl}&duration=${Number(
+                videoDetails.videoClipDuration
+            )}`;
             const eventSrc = new EventSource(url);
 
             /**
@@ -113,6 +118,7 @@ const MainContent = ({ videosList }) => {
                         setVideoDetails((prev) => {
                             return { ...prev, shouldCreateGif: false };
                         });
+                        toast.success(() => <div>Gif Downloaded.</div>);
                     });
                     eventSrc.close();
                 } else if (parsedData.state === "Failed") {
@@ -121,7 +127,7 @@ const MainContent = ({ videosList }) => {
                         return { ...prev, shouldCreateGif: false };
                     });
                     eventSrc.close();
-                    alert(parsedData.message);
+                    toast.error(() => <div>{parsedData.message}</div>);
                 }
             };
 
@@ -163,13 +169,6 @@ const MainContent = ({ videosList }) => {
                 </div>
             ) : videoDetails.shouldCreateGif === true ? (
                 <div className="MainContentLoading">
-                    <Loader
-                        type="Bars"
-                        color="red"
-                        secondaryColor="black"
-                        height={40}
-                        width={40}
-                    />
                     <Progress messages={messages} />
                 </div>
             ) : (

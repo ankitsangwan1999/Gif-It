@@ -11,7 +11,7 @@ const SearchBar = ({ setVideosList }) => {
     const handleSearchClick = (e) => {
         const inputStr = inputSearch.current.value.trim();
         if (inputStr === "") {
-            toast("Type Something...", {
+            toast.info("Type Something...", {
                 position: toast.POSITION.TOP_RIGHT,
             });
         } else {

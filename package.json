@@ -11,7 +11,6 @@
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-id-generator": "^3.0.2",
-        "react-loader-spinner": "^4.0.0",
         "react-scripts": "4.0.3",
         "react-toastify": "^8.0.3",
         "react-youtube": "^7.13.1",

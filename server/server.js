@@ -3,8 +3,10 @@ import path from "path";
 import makeGif from "./helpers/makeGif.mjs";
 import dotenv from "dotenv";
 import sendEvent from "./helpers/sendEvent.mjs";
+import fs from "fs";
 const __dirname = path.resolve(); // __dirname here represent the absolute path to the root of the Project
 dotenv.config();
+
 const app = express();
 /**
  * Check All env vars currently Used
@@ -13,7 +15,7 @@ console.log(process.env);
 
 /**
  *
- * @param {*} seconds
+ * @param seconds
  * @returns Format:- HH:MM:SS
  */
 const getFormatedTimeInput = (seconds) => {
@@ -35,10 +37,10 @@ app.get("/gifit", (req, res) => {
      */
     const watchUrl = req.query.watchUrl;
     const seekingTime = req.query.seekingTime; // in seconds
-    const duration = req.query.duration; // in seconds
+    const duration = Number(req.query.duration); // in seconds
     const seekingTimeFormatted = getFormatedTimeInput(seekingTime);
     const durationFormatted = getFormatedTimeInput(duration);
-    console.log("Log: Query:", watchUrl, seekingTime, duration);
+    console.log("LOG: Query:", watchUrl, seekingTime, duration);
 
     const headers = {
         "Access-Control-Allow-Origin": process.env.REACT_APP_ORIGIN, // Origin where React App is running, to Allow Cross-Origin receiving of response sent from here.
@@ -48,12 +50,12 @@ app.get("/gifit", (req, res) => {
 
     // When Connection is Closed from Client Side.
     res.on("close", () => {
-        console.log("Closed From the Client.");
+        console.log("LOG: Closed From the Client.");
         res.end(); // We cannot do res.send() or res.write() after this.
     });
 
     sendEvent(res, {
-        message: `Will Seek for: ${seekingTimeFormatted}, and duration is: ${durationFormatted}`,
+        message: `Will Seek for: ${seekingTimeFormatted}, and duration is: ${duration}`,
         state: "Pending",
     });
 
@@ -64,9 +66,9 @@ app.get("/gifit", (req, res) => {
                 state: "Completed",
             });
         })
-        .catch((err) => {
+        .catch(({ message, err }) => {
             sendEvent(res, {
-                message: `Try Again.`,
+                message: err.stderr === undefined ? message : err.stderr,
                 state: "Failed",
             });
         });
@@ -87,9 +89,9 @@ app.get("/download", (req, res) => {
     }
     res.sendFile("out.gif", { root: __dirname }, (err) => {
         if (err) {
-            console.log("LOG: Error: Couldn't Send the File");
+            console.log("LOG: Error in sendFile:", err);
         } else {
-            console.log("LOG: Success: Sent the Output Gif File.");
+            console.log("LOG: Successfully sent the Output Gif File.");
         }
     });
 });
