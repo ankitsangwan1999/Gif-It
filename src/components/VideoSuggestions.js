@@ -2,7 +2,7 @@ import React from "react";
 import VideoListItem from "./VideoListItem";
 import "../styles/VideoSuggestions.css";
 
-const VideoSuggestions = ({ videosList, setVideoDetails }) => {
+const VideoSuggestions = ({ videosList, setVideosList }) => {
     return (
         <div className="VideoSuggestions">
             {videosList.map((video, index) => {
@@ -10,11 +10,12 @@ const VideoSuggestions = ({ videosList, setVideoDetails }) => {
                     <VideoListItem
                         key={video.etag}
                         videoItem={video}
-                        setVideoDetails={setVideoDetails}
+                        setVideosList={setVideosList}
                         thumbnail={video.snippet.thumbnails.default.url}
+                        index={index}
                     />
                 ) : (
-                    <div></div>
+                    <></>
                 );
             })}
         </div>

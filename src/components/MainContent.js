@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === "production") {
         process.env.REACT_APP_BACKEND_ORIGIN_PROD + "/gifit";
 }
 
-const MainContent = ({ videosList }) => {
+const MainContent = ({ videosList, setVideosList }) => {
     const [messages, setMessages] = useState([]);
     const [showEditControls, setShowEditControls] = useState(false);
     const [videoDetails, setVideoDetails] = useState({
@@ -182,7 +182,7 @@ const MainContent = ({ videosList }) => {
                     {showEditControls === false ? (
                         <VideoSuggestions
                             videosList={videosList}
-                            setVideoDetails={setVideoDetails}
+                            setVideosList={setVideosList}
                         />
                     ) : (
                         <EditControls

@@ -3,7 +3,6 @@ import path from "path";
 import makeGif from "./helpers/makeGif.mjs";
 import dotenv from "dotenv";
 import sendEvent from "./helpers/sendEvent.mjs";
-import fs from "fs";
 const __dirname = path.resolve(); // __dirname here represent the absolute path to the root of the Project
 dotenv.config();
 

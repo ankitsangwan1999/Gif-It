@@ -20,7 +20,10 @@ const App = () => {
                     Search Results will be shown here...
                 </div>
             ) : (
-                <MainContent videosList={videosList} />
+                <MainContent
+                    videosList={videosList}
+                    setVideosList={setVideosList}
+                />
             )}
             <Footer />
         </div>
