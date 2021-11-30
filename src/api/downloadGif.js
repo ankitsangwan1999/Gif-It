@@ -28,8 +28,26 @@ if (process.env.NODE_ENV === "production") {
 // };
 
 const downloadGif = (params = {}, callback) => {
+    const setMessages = params.setMessages;
     axios
-        .get(ROOT_URL + "/download", { params: params, responseType: "blob" })
+        .get(ROOT_URL + "/download", {
+            params: params,
+            responseType: "blob",
+            onDownloadProgress: (progressEvent) => {
+                setMessages((prevState) => [
+                    `Downloading: ${Math.floor(
+                        (progressEvent.loaded / progressEvent.total) * 100
+                    )}%`,
+                ]);
+
+                // Logging % downloaded
+                console.log(
+                    `LOG: Downloading: ${
+                        (progressEvent.loaded / progressEvent.total) * 100
+                    }%`
+                );
+            },
+        })
         .then((response) => {
             download(response.data, "gif-it.gif", "image/gif");
             callback();

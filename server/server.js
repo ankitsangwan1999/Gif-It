@@ -54,14 +54,14 @@ app.get("/gifit", (req, res) => {
     });
 
     sendEvent(res, {
-        message: `Will Seek for: ${seekingTimeFormatted}, and duration is: ${duration}`,
+        message: `Seeking to: ${seekingTimeFormatted}, for Duration: ${duration}`,
         state: "Pending",
     });
 
     makeGif(res, watchUrl, seekingTimeFormatted, durationFormatted)
         .then(() => {
             sendEvent(res, {
-                message: `Your Gif is Ready for Download...`,
+                message: `Your Gif is Ready for Download.`,
                 state: "Completed",
             });
         })
