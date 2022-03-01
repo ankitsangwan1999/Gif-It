@@ -1,3 +1,5 @@
+<a href="https://www.producthunt.com/posts/gif-it?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-gif&#0045;it" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=334087&theme=light" alt="Gif&#0045;It - Make&#0032;Gifs&#0032;from&#0032;portion&#0032;of&#0032;any&#0042;&#0032;Youtube&#0032;Video | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
 ## What am I looking at?
 **Gif-It** - An online tool to Make Gifs from portion of any* Youtube Video
 
@@ -39,17 +41,15 @@ Step-5:
 
 
 ## What should I have under my belt before start contributing?
-1. **HTML/CSS/JS** (*Beginner*).
-2. **React.js** (*Beginner*).
-3. **Node.js** (*Beginner*).
+1. **HTML/CSS/JS**
+2. **React.js** 
+3. **Node.js**
 
 ## Are there any tips/guidelines for contributors under [ContriHUB-21](http://contrihub21.herokuapp.com/)?
 Yes. Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## Where to add the contributors name for [ContriHUB-21](http://contrihub21.herokuapp.com/)?
-Inside [CONTRIBUTORS.md](CONTRIBUTORS.md) file.
 
-## Mentor(s)
+## Author
 * [Ankit Sangwan](https://github.com/ankitsangwan1999)
 
 Special Mention: [Aman Tibrewal](https://github.com/amantibrewal310) for suggesting youtube-dl.
