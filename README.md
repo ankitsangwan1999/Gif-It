@@ -45,10 +45,6 @@ Step-5:
 2. **React.js** 
 3. **Node.js**
 
-## Are there any tips/guidelines for contributors under [ContriHUB-21](http://contrihub21.herokuapp.com/)?
-Yes. Check [CONTRIBUTING.md](CONTRIBUTING.md)
-
-
 ## Author
 * [Ankit Sangwan](https://github.com/ankitsangwan1999)
 
