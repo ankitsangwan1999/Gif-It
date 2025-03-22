@@ -29,7 +29,7 @@ const getSourceUrl = async (watchUrl) => {
             preferFreeFormats: true,
             youtubeSkipDashManifest: true,
             noCacheDir: true,
-            referer: watchUrl
+            cookies: 'cookies.txt'
         });
         const sourceUrl = response.url;
 
