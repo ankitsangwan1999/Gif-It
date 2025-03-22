@@ -22,6 +22,7 @@ const getSourceUrl = async (watchUrl) => {
         const response = await youtubedl(watchUrl, {
             format: "mp4",
             dumpSingleJson: true,
+            extractorArgs: "youtube:player_client=web",
             noWarnings: true,
             noCallHome: true,
             noCheckCertificate: true,
