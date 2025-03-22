@@ -108,7 +108,7 @@ const MainContent = ({ videosList, setVideosList }) => {
                 const parsedData = JSON.parse(event.data);
                 setMessages((prevState) => [...prevState, parsedData.message]);
                 if (parsedData.state === "Completed") {
-                    downloadGif({ setMessages }, () => {
+                    downloadGif({ setMessages }, watchUrl, () => {
                         // This Function will be called by getGif after Gif is Downloaded.
                         setMessages([]);
                         setVideoDetails((prev) => {
