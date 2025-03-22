@@ -95,6 +95,10 @@ app.get("/download", (req, res) => {
     });
 });
 
+app.get("/health", (req, res) => {
+    res.send("Gif-it server is up.");
+});
+
 if (process.env.NODE_ENV === "production") {
     console.log("LOG: Running in Production.");
     app.use(express.static("build"));
