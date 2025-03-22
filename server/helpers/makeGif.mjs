@@ -3,11 +3,10 @@ import { join } from "path";
 import youtubedl from "youtube-dl-exec";
 import dotenv from "dotenv";
 import sendEvent from "./sendEvent.mjs";
-import ffmpeg from "@ffmpeg-installer/ffmpeg";
 dotenv.config();
 
 
-const FFMPEG_PATH = ffmpeg.path;
+const FFMPEG_PATH = "node_modules/ffmpeg-static/ffmpeg";
 const FFMPEG_MP4_TO_GIF = process.env.FFMPEG_MP4_TO_GIF;
 
 console.log("LOG: FFMPEG PATH:", FFMPEG_PATH);

@@ -18,7 +18,7 @@
         "youtube-dl-exec": "^3.0.19"
     },
     "scripts": {
-        "start": "react-scripts start",
+        "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
         "serve": "node --experimental-wasm-threads ./server/server.js",
         "build": "react-scripts build"
     },
