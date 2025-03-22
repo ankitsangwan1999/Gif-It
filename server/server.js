@@ -67,7 +67,7 @@ app.get("/gifit", (req, res) => {
         })
         .catch(({ message, err }) => {
             sendEvent(res, {
-                message: err.stderr === undefined ? message : err.stderr,
+                message: err.stderr === undefined || err.stderr.length === 0 ? message : err.stderr,
                 state: "Failed",
             });
         });
@@ -107,5 +107,5 @@ if (process.env.NODE_ENV === "production") {
     console.log("LOG: Running in Development.");
 }
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`Server Listening at ${port}`));
