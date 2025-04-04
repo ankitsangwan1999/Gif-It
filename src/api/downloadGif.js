@@ -27,7 +27,27 @@ if (process.env.NODE_ENV === "production") {
 //         });
 // };
 
-const downloadGif = (params = {}, callback) => {
+// write success or failure message to localstorage and read it in the component
+// success object contains urls of video successfully converted to gif
+// failure object contains urls of video that failed to convert to gif
+const writeToLocalStorage = (success, url) => {
+    const successObj = JSON.parse(localStorage.getItem("success"));
+    const failureObj = JSON.parse(localStorage.getItem("failure"));
+    if (success) {
+        localStorage.setItem(
+            "success",
+            JSON.stringify({ ...successObj, url })
+        );
+    } else {
+        localStorage.setItem(
+            "failure",
+            JSON.stringify({ ...failureObj, url })
+        );
+    }
+};
+
+
+const downloadGif = (params = {}, url, callback) => {
     const setMessages = params.setMessages;
     axios
         .get(ROOT_URL + "/download", {
@@ -50,6 +70,7 @@ const downloadGif = (params = {}, callback) => {
         })
         .then((response) => {
             download(response.data, "gif-it.gif", "image/gif");
+            writeToLocalStorage(true, url);
             callback();
         })
         .catch(function (error) {
@@ -57,6 +78,7 @@ const downloadGif = (params = {}, callback) => {
                 <div>There was an error downloading the Gif. Try Again.</div>
             ));
             console.error("LOG: Error in Downloading:", error);
+            writeToLocalStorage(false, url);
             callback();
         });
 };
